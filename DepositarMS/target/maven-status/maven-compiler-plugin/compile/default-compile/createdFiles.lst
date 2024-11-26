@@ -1,0 +1,5 @@
+depositar\model\Conta.class
+depositar\repository\DepositarRepository.class
+depositar\controller\DepositarController.class
+depositar\service\DepositarService.class
+com\depositar\ms\MsDepositarApplication.class
