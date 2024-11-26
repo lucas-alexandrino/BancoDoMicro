@@ -1,0 +1,3 @@
+FROM MYSQ
+
+WORKDIR /the/workdir/path
