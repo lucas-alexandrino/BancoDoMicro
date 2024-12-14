@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Home.css";
 
    /// SOBRE:
@@ -11,7 +12,10 @@ function Home() {
       <div className='container-body'>
       {/* NavBar */}
       <div className="navbar">
-        <h1>Minha NavBar</h1>
+            <h1>Minha NavBar</h1>
+        <Link to="/banco">
+      <button>Ir para Banco</button>
+        </Link>
         </div>
         
       <div className="container">

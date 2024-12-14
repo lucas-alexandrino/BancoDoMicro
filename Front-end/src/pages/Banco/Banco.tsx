@@ -1,6 +1,6 @@
 import { useState } from "react";
 import apiService from "../../service/Service";
-import "../Banco/Banco.css"
+import "./Banco.css"
 import axios from "axios";
 
  
@@ -59,11 +59,11 @@ const [metodo, setMetodo] = useState(''); // Método selecionado
     }
     setRespostaAPI(dados); // Define a resposta em caso de sucesso
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      // Captura mensagens de erro do Axios
-      const mensagemErro = error.response?.data || 'Erro desconhecido';
-      setRespostaAPI({ erro: mensagemErro });
-    } else {
+  if (axios.isAxiosError(error)) {
+  console.error('Erro Axios:', error.response?.data || error.message);
+  const mensagemErro = error.response?.data || 'Erro desconhecido';
+  setRespostaAPI({ erro: mensagemErro });
+} else {
       setRespostaAPI({ erro: 'Erro inesperado!' });
     }
   }
