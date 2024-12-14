@@ -1,0 +1,20 @@
+
+services:
+
+ nginx:
+    container_name: nginx_app
+    build:
+      context: ./Front-end # Diretório onde está o Dockerfile do React
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - redelocal
+
+
+
+
+networks:
+  redelocal:
+    driver: bridge
