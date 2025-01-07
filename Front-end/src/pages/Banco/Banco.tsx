@@ -1,80 +1,105 @@
 import { useState } from "react";
 import apiService from "../../service/Service";
-import "./Banco.css"
+import "./Banco.css";
+import { CiLinkedin } from "react-icons/ci";
+import { FaGithub } from "react-icons/fa";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
- 
-
-   /// SOBRE:
-//// UML,ARQUITETURA ANTES E DEPOIS,EXPLICAÇÃO DETALHADA, ARQUITETURA CLOUD
-    // CONHECIMENTOS APRENDIDOS
 function Banco() {
+  const [metodo, setMetodo] = useState("");
+  const [numeroAgencia, setNumeroAgencia] = useState("");
+  const [nomeTitular, setNomeTitular] = useState("");
+  const [numeroConta, setNumeroConta] = useState("");
+  const [numeroDestino, setNumeroDestino] = useState("");
+  const [saldo, setSaldo] = useState("");
+  const [valor, setValor] = useState("");
+  const [limite, setLimite] = useState("");
+  const [aniversario, setAniversario] = useState("");
+  const [respostaAPI, setRespostaAPI] = useState<
+    { erro?: string } | any | null
+  >(null);
 
-const [metodo, setMetodo] = useState(''); // Método selecionado
-  const [numeroAgencia, setNumeroAgencia] = useState('');
-  const [nomeTitular, setNomeTitular] = useState('');
-  const [numeroConta, setNumeroConta] = useState(''); // Número da conta
-  const [numeroDestino, setNumeroDestino] = useState(''); // Número da conta destino (para transferências)
-  const [saldo, setSaldo] = useState('');
-  const [valor, setValor] = useState(''); // Valor da operação
-  const [limite, setLimite] = useState('');
-  const [aniversario, setAniversario] = useState('');
-  const [respostaAPI, setRespostaAPI] = useState<{ erro?: string } | any | null>(null);// Resposta da API
-
-
-  // Função para chamar o método correto da service
- const chamarAPI = async () => {
-  try {
-    let dados;
-    switch (metodo) {
-        case 'contacorrente':
-        dados = await apiService.contaCorrente(numeroConta, numeroAgencia, nomeTitular, saldo, limite);
-        break;
-       case 'contapoupanca':
-        dados = await apiService.contaPoupanca(numeroConta, numeroAgencia, nomeTitular, saldo, aniversario);
-        break;
-       case 'buscaconta':
-        dados = await apiService.buscaConta(numeroConta);
-        break;
-       case 'atualizar':
-        dados = await apiService.atualizar(numeroConta, saldo, limite);
-        break;
-      case 'sacar':
-        dados = await apiService.sacar(numeroConta, valor);
-        break;
-      case 'depositar':
-        dados = await apiService.depositar(numeroConta, valor);
-        break;
-       case 'transferir':
-        dados = await apiService.transferir(numeroConta, numeroDestino, valor);
-        break;
-       case 'deletar':
-        dados = await apiService.deletar(numeroConta);
-        break;
-        case 'listacontas':
-        dados = await apiService.listaContas();
-        break;
-      default:
-        throw new Error('Método inválido');
+  const chamarAPI = async () => {
+    try {
+      let dados;
+      switch (metodo) {
+        case "contacorrente":
+          dados = await apiService.contaCorrente(
+            numeroConta,
+            numeroAgencia,
+            nomeTitular,
+            saldo,
+            limite
+          );
+          break;
+        case "contapoupanca":
+          dados = await apiService.contaPoupanca(
+            numeroConta,
+            numeroAgencia,
+            nomeTitular,
+            saldo,
+            aniversario
+          );
+          break;
+        case "buscaconta":
+          dados = await apiService.buscaConta(numeroConta);
+          break;
+        case "atualizar":
+          dados = await apiService.atualizar(numeroConta, saldo, limite);
+          break;
+        case "sacar":
+          dados = await apiService.sacar(numeroConta, valor);
+          break;
+        case "depositar":
+          dados = await apiService.depositar(numeroConta, valor);
+          break;
+        case "transferir":
+          dados = await apiService.transferir(
+            numeroConta,
+            numeroDestino,
+            valor
+          );
+          break;
+        case "deletar":
+          dados = await apiService.deletar(numeroConta);
+          break;
+        case "listacontas":
+          dados = await apiService.listaContas();
+          break;
+        default:
+          throw new Error("Método inválido");
+      }
+      setRespostaAPI(dados);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error("Erro Axios:", error.response?.data || error.message);
+        const mensagemErro = error.response?.data || "Erro desconhecido";
+        setRespostaAPI({ erro: mensagemErro });
+      } else {
+        setRespostaAPI({ erro: "Erro inesperado!" });
+      }
     }
-    setRespostaAPI(dados); // Define a resposta em caso de sucesso
-  } catch (error) {
-  if (axios.isAxiosError(error)) {
-  console.error('Erro Axios:', error.response?.data || error.message);
-  const mensagemErro = error.response?.data || 'Erro desconhecido';
-  setRespostaAPI({ erro: mensagemErro });
-} else {
-      setRespostaAPI({ erro: 'Erro inesperado!' });
-    }
-  }
-};
+  };
 
-    return (
+  return (
     <>
-     <div className="container-body">
-        {/* NavBar */}
+      <div className="container-body">
         <div className="navbar">
-          <h1>Minha NavBar</h1>
+          <Link to={"/"}>
+            <h1>Início</h1>
+          </Link>
+          <h1 id="icones">
+            <a
+              href="https://www.linkedin.com/in/lucasalexandrino"
+              target="_blank"
+            >
+              <CiLinkedin />
+            </a>
+            <a href="https://github.com/lucas-alexandrino" target="_blank">
+              <FaGithub />
+            </a>
+          </h1>
         </div>
 
         <div className="container">
@@ -82,16 +107,18 @@ const [metodo, setMetodo] = useState(''); // Método selecionado
           <div className="side"></div>
 
           {/* Coluna central */}
-          <div className="center">
-            <div className="content">
-              <p>Formulário Banco:</p>
+          <div className="center_banco">
+            <div className="content_banco">
+              <h1 id="titulo">Formulário Banco:</h1>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   chamarAPI();
                 }}
               >
-                <label htmlFor="metodo">Selecione o método bancário:</label>
+                <label htmlFor="metodo" id="paragrafo">
+                  Selecione o método bancário:
+                </label>
                 <select
                   id="metodo"
                   value={metodo}
@@ -110,129 +137,137 @@ const [metodo, setMetodo] = useState(''); // Método selecionado
                 </select>
 
                 {metodo && (
-  <>
-    {metodo !== 'listacontas' && (
-      <div>
-        <label htmlFor="numeroConta">Número da Conta:</label>
-        <input
-          id="numeroConta"
-          type="text"
-          value={numeroConta}
-          onChange={(e) => setNumeroConta(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                  <>
+                    {metodo !== "listacontas" && (
+                      <div>
+                        <label htmlFor="numeroConta">Número da Conta:</label>
+                        <input
+                          id="numeroConta"
+                          type="text"
+                          value={numeroConta}
+                          onChange={(e) => setNumeroConta(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    {metodo === 'transferir' && (
-      <div>
-        <label htmlFor="numeroDestino">Número da Conta Destino:</label>
-        <input
-          id="numeroDestino"
-          type="text"
-          value={numeroDestino}
-          onChange={(e) => setNumeroDestino(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                    {metodo === "transferir" && (
+                      <div>
+                        <label htmlFor="numeroDestino">
+                          Número da Conta Destino:
+                        </label>
+                        <input
+                          id="numeroDestino"
+                          type="text"
+                          value={numeroDestino}
+                          onChange={(e) => setNumeroDestino(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    {(metodo === 'contacorrente' || metodo === 'contapoupanca') && (
-      <div>
-        <label htmlFor="numeroagencia">Número da Agência:</label>
-        <input
-          id="numeroagencia"
-          type="number"
-          value={numeroAgencia}
-          onChange={(e) => setNumeroAgencia(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                    {(metodo === "contacorrente" ||
+                      metodo === "contapoupanca") && (
+                      <div>
+                        <label htmlFor="numeroagencia">
+                          Número da Agência:
+                        </label>
+                        <input
+                          id="numeroagencia"
+                          type="number"
+                          value={numeroAgencia}
+                          onChange={(e) => setNumeroAgencia(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    {(metodo === 'contacorrente' || metodo === 'contapoupanca') && (
-      <div>
-        <label htmlFor="nometitular">Nome Titular:</label>
-        <input
-          id="nometitular"
-          type="text"
-          value={nomeTitular}
-          onChange={(e) => setNomeTitular(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                    {(metodo === "contacorrente" ||
+                      metodo === "contapoupanca") && (
+                      <div>
+                        <label htmlFor="nometitular">Nome Titular:</label>
+                        <input
+                          id="nometitular"
+                          type="text"
+                          value={nomeTitular}
+                          onChange={(e) => setNomeTitular(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    {(metodo === 'contacorrente' || metodo === 'contapoupanca' || metodo === 'atualizar') && (
-      <div>
-        <label htmlFor="saldo">Saldo da Conta:</label>
-        <input
-          id="saldo"
-          type="number"
-          value={saldo}
-          onChange={(e) => setSaldo(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                    {(metodo === "contacorrente" ||
+                      metodo === "contapoupanca" ||
+                      metodo === "atualizar") && (
+                      <div>
+                        <label htmlFor="saldo">Saldo da Conta:</label>
+                        <input
+                          id="saldo"
+                          type="number"
+                          value={saldo}
+                          onChange={(e) => setSaldo(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    {(metodo === 'contacorrente' || metodo === 'atualizar') && (
-      <div>
-        <label htmlFor="limite">Limite da Conta:</label>
-        <input
-          id="limite"
-          type="number"
-          value={limite}
-          onChange={(e) => setLimite(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                    {(metodo === "contacorrente" || metodo === "atualizar") && (
+                      <div>
+                        <label htmlFor="limite">Limite da Conta:</label>
+                        <input
+                          id="limite"
+                          type="number"
+                          value={limite}
+                          onChange={(e) => setLimite(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    {metodo === 'contapoupanca' && (
-      <div>
-        <label htmlFor="aniversario">Aniversário:</label>
-        <input
-          id="aniversario"
-          type="number"
-          value={aniversario}
-          onChange={(e) => setAniversario(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                    {metodo === "contapoupanca" && (
+                      <div>
+                        <label htmlFor="aniversario">Aniversário:</label>
+                        <input
+                          id="aniversario"
+                          type="number"
+                          value={aniversario}
+                          onChange={(e) => setAniversario(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    {(metodo === 'sacar' || metodo === 'depositar' || metodo === 'transferir') && (
-      <div>
-        <label htmlFor="valor">Valor:</label>
-        <input
-          id="valor"
-          type="number"
-          value={valor}
-          onChange={(e) => setValor(e.target.value)}
-          required
-        />
-      </div>
-    )}
+                    {(metodo === "sacar" ||
+                      metodo === "depositar" ||
+                      metodo === "transferir") && (
+                      <div>
+                        <label htmlFor="valor">Valor:</label>
+                        <input
+                          id="valor"
+                          type="number"
+                          value={valor}
+                          onChange={(e) => setValor(e.target.value)}
+                          required
+                        />
+                      </div>
+                    )}
 
-    <button type="submit">Enviar</button>
-  </>
-)}
-
+                    <button type="submit">Enviar</button>
+                  </>
+                )}
               </form>
 
-             <div className="resultado">
-              {respostaAPI ? (
+              <div className="resultado">
+                {respostaAPI ? (
                   respostaAPI.erro ? (
-               <p style={{ color: 'red' }}>{respostaAPI.erro}</p> // Mostra o erro em vermelho
+                    <p style={{ color: "red" }}>{respostaAPI.erro}</p>
+                  ) : (
+                    <pre>{JSON.stringify(respostaAPI, null, 2)}</pre>
+                  )
                 ) : (
-                <pre>{JSON.stringify(respostaAPI, null, 2)}</pre> // Mostra a resposta de sucesso
-              )
-            ) : (
-              <p>Preencha os dados e envie para ver os resultados.</p>
-            )}
-          </div>
-
+                  <p>Preencha os dados e envie para ver os resultados.</p>
+                )}
+              </div>
             </div>
           </div>
 

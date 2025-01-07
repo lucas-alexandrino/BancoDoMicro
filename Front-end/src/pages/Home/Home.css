@@ -1,67 +1,59 @@
 .container-body {
-    background-color: rgb(51, 51, 51);
-    height: 100vh;
+  background-color: rgb(51, 51, 51);
+  height: 100vh;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: 3fr 6fr 3fr;
-    /* Proporção das colunas */
-    height: 100vh;
-        /* Permite rolagem da página inteira */
-
+  display: grid;
+  grid-template-columns: 3fr 6fr 3fr;
+  height: 100vh;
 }
 
-/* Laterais vermelhas */
 .side {
-    background-color: rgb(51, 51, 51);
+  background-color: rgb(51, 51, 51);
 }
 
-/* Coluna central */
 .center {
-    display: flex;
-    /* Usando Flexbox */
-    justify-content: center;
-    /* Centraliza horizontalmente */
-    align-items: center;
-    /* Centraliza verticalmente */
-    background-color: white;
-
-    margin-top: 50px;
-    border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin-top: 50px;
+  border-radius: 10px;
 }
 
 .navbar {
-    position: static;
-
-    width: 100%;
-background-color: rgb(51, 51, 51);
-    background: radial-gradient(ellipse,
-                rgba(255, 0, 0, 0) 70%,
-                /* Transparente até 80% do círculo */
-                rgb(50, 147, 226) 110%
-                /* Vermelho opaco nos últimos 20% */
-            );
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    z-index: 1000;
-    border-radius: 10px;
-
-    
-
-    /* Garante que a NavBar fique por cima */
+  position: static;
+  width: 100%;
+  background-color: rgb(51, 51, 51);
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 0, 0, 0) 70%,
+    rgb(50, 147, 226) 110%
+  );
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000;
+  border-radius: 10px;
 }
 
-/* Conteúdo da coluna central */
 .content {
-    max-width: 600px;
-    /* Define uma largura máxima */
+  max-width: 600px;
+  margin-top: 20px;
 }
 
-/* Quadrado preto */
+.content p {
+  margin-bottom: 16px;
+}
+
+.content li {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
 .square {
-    width: 200px;
-    height: 200px;
-    background-color: black;
+  width: 200px;
+  height: 200px;
+  background-color: black;
 }

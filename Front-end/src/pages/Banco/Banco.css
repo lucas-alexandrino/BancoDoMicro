@@ -1,62 +1,75 @@
 .container-body {
-    background-color: rgb(51, 51, 51);
-    height: 100vh;
+  background-color: rgb(51, 51, 51);
+  height: 100vh;
 }
-/*     height: 100vh;  */
+
 .container {
-    display: grid;
-    grid-template-columns: 3fr 6fr 3fr;
-    /* Proporção das colunas */
-
-    /* Permite rolagem da página inteira */
+  display: grid;
+  grid-template-columns: 3fr 6fr 3fr;
 
 }
 
-/* Coluna central */
-.center {
-    display: flex;
-    /* Usando Flexbox */
-    justify-content: center;
-    /* Centraliza horizontalmente */
-    align-items: center;
-    /* Centraliza verticalmente */
-    background-color: white;
+.center_banco {
+  height: auto; 
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  background-color: rgb(51, 51, 51);
+  margin-top: 50px;
+}
 
-    margin-top: 50px;
-    border-radius: 10px;
+.content_banco {
+  border-radius: 10px;
+  max-width: 600px;
+  padding: 100px;
+  background-color: rgb(107, 105, 105);
+}
+
+.resultado {
+  background-color: whitesmoke;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .navbar {
-    position: static;
+  position: static;
+  width: 100%;
+  background-color: rgb(51, 51, 51);
+  background: radial-gradient(
+    ellipse,
+    rgba(255, 0, 0, 0) 70%,
+    rgb(50, 147, 226) 110%
+  );
+  color: white;
+  padding: 10px 0;
+  z-index: 1000;
+  border-radius: 10px;
 
-    width: 100%;
-    background-color: rgb(51, 51, 51);
-    background: radial-gradient(ellipse,
-            rgba(255, 0, 0, 0) 70%,
-            /* Transparente até 80% do círculo */
-            rgb(50, 147, 226) 110%
-            /* Vermelho opaco nos últimos 20% */
-        );
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    z-index: 1000;
-    border-radius: 10px;
-
-
-
-    /* Garante que a NavBar fique por cima */
 }
 
-/* Conteúdo da coluna central */
-.content {
-    max-width: 600px;
-    /* Define uma largura máxima */
+#titulo {
+  color: rgb(50, 147, 226);
+  font-family: cursive;
+  text-align: center;
 }
 
-/* Quadrado preto */
-.square {
-    width: 200px;
-    height: 200px;
-    background-color: black;
+#paragrafo {
+  font-family: cursive;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: rgb(50, 147, 226);
 }
