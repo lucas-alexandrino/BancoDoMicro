@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Home.css";
 
+
 function Home() {
   return (
     <>
@@ -41,8 +42,8 @@ function Home() {
 
               <p>Abaixo segue o desenho da arquitetura anterior e atual</p>
 
-              <img src="img/arquitetura_microbanco.png" alt="arquitetura" />
-              <img src="img/Arquitetura_AWS.drawio.png" alt="Solução AWS" />
+              <img src="/arquitetura_microbanco.png" alt="arquitetura" />
+              <img src="/Arquitetura_AWS.drawio.png" alt="Solução AWS" />
 
               <p></p>
               <i>
